@@ -1,6 +1,6 @@
 module.exports = {
   builder: {
-    count: 1,
+    count: 5,
     loadout: [WORK,CARRY,MOVE]
   },
   harvester: {

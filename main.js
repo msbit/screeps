@@ -45,13 +45,13 @@ var tick = function () {
 
   role.tick();
 
-  if(Game.spawns['Spawn1'].energy === Game.spawns['Spawn1'].energyCapacity) {
+  /*if(Game.spawns['Spawn1'].energy === Game.spawns['Spawn1'].energyCapacity) {
     //make somewhere to store the addition
     var x = Math.floor(Math.random() * MAX_X);
     var y = Math.floor(Math.random() * MAX_Y);
     var structure = structures[Math.floor(Math.random() * structures.length)];
     Game.rooms[room_name].createConstructionSite(x, y, structure);
-  }
+  }*/
 };
 
 module.exports.loop = tick;

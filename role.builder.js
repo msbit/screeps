@@ -1,3 +1,5 @@
+var util = require('util');
+
 module.exports.tick = function(creep) {
   if(creep.memory.building && creep.carry.energy == 0) {
     creep.memory.building = false;
@@ -11,8 +13,9 @@ module.exports.tick = function(creep) {
   if(creep.memory.building) {
     var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
     if(targets.length) {
-      if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(targets[0]);
+      var closest = _.minBy(targets, util.distance_from(creep));
+      if(creep.build(closest) == ERR_NOT_IN_RANGE) {
+        creep.moveTo(closest);
       }   
     }   
   }   

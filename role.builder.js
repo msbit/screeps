@@ -13,7 +13,15 @@ module.exports.tick = function(creep) {
   if(creep.memory.building) {
     var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
     if(targets.length) {
-      var closest = _.minBy(targets, util.distance_from(creep));
+      var closest_distance;
+      var closest;
+      targets.forEach(function(target) {
+        target_distance = util.distance_from(creep)(target.pos);
+        if(closest_distance === undefined || closest_distance > target_distance) {
+          closest_distance = target_distance;
+          closest = target;
+        }
+      });
       if(creep.build(closest) == ERR_NOT_IN_RANGE) {
         creep.moveTo(closest);
       }   

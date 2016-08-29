@@ -5,25 +5,17 @@ var memory = require('memory');
 var tick = function () {
   memory.tick();
 
-  var harvesters = _.filter(Game.creeps, function(creep) {
-    return creep.memory.role === 'harvester';
-  });
-
-  if(harvesters.length < Memory.config.harvester_count) {
-    Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE], undefined, {
-      role: 'harvester'
+  Object.keys(role.definitions).forEach(function(name) {
+    var config = Memory.config[name];
+    var current = _.filter(Game.creeps, function(creep) {
+      return creep.memory.role === name;
     });
-  }
-
-  var upgraders = _.filter(Game.creeps, function(creep) {
-    return creep.memory.role === 'upgrader';
+    if(current.length < config.count) {
+      Game.spawns['Spawn1'].createCreep(config.loadout, undefined, {
+        role: name
+      });
+    }
   });
-
-  if(upgraders.length < Memory.config.upgrader_count) {
-    Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE], undefined, {
-      role: 'upgrader'
-    });
-  }
 
   role.tick();
 };

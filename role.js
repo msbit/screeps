@@ -1,4 +1,4 @@
-var role_names = ['harvester'];
+var role_names = ['harvester', 'upgrader'];
 var role_defs = {};
 
 role_names.forEach(function(role_name) {

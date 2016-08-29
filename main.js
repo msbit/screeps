@@ -1,9 +1,22 @@
-var roleHarvester = require('role.harvester');
+var role = require('role');
+var memory = require('memory');
 
-module.exports.loop = function () {
+var HARVESTER_COUNT = 2;
 
-    for(var name in Game.creeps) {
-        var creep = Game.creeps[name];
-        roleHarvester.run(creep);
-    }   
-}
+var tick = function () {
+  memory.tick();
+
+  var harvesters = _.filter(Game.creeps, function(creep) {
+    return creep.memory.role === 'harvester';
+  });
+
+  if(harvesters.length < HARVESTER_COUNT) {
+    Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE], undefined, {
+      role: 'harvester'
+    });
+  }
+
+  role.tick();
+};
+
+module.exports.loop = tick;

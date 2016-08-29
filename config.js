@@ -1,4 +1,4 @@
 module.exports = {
-  harvester_count: 2,
-  upgrader_count: 1
+  harvester_count: 10,
+  upgrader_count: 5
 };

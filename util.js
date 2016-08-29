@@ -17,11 +17,11 @@ var get_nearest = function(positionable, targets) {
   return nearest;
 };
 
-module.exports.go_to_nearest = function(movable, type) {
+module.exports.act_on_nearest = function(movable, type, func) {
   var targets = movable.room.find(type);
   if(targets.length) {
     var nearest = get_nearest(movable, targets);
-    if(movable.build(nearest) == ERR_NOT_IN_RANGE) {
+    if(func.call(movable, nearest) == ERR_NOT_IN_RANGE) {
       movable.moveTo(nearest);
     }
   }

@@ -11,8 +11,8 @@ module.exports.tick = function(creep) {
   }   
 
   if(creep.memory.building) {
-    util.go_to_nearest(creep, FIND_CONSTRUCTION_SITES);
+    util.act_on_nearest(creep, FIND_CONSTRUCTION_SITES, Creep.prototype.build);
   } else {
-    util.go_to_nearest(creep, FIND_SOURCES);
+    util.act_on_nearest(creep, FIND_SOURCES, Creep.prototype.harvest);
   }   
 };

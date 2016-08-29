@@ -1,4 +1,4 @@
-var config = require('config');
+Memory.config = require('config');
 var role = require('role');
 var memory = require('memory');
 
@@ -9,7 +9,7 @@ var tick = function () {
     return creep.memory.role === 'harvester';
   });
 
-  if(harvesters.length < config.harvester_count) {
+  if(harvesters.length < Memory.config.harvester_count) {
     Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE], undefined, {
       role: 'harvester'
     });
@@ -19,7 +19,7 @@ var tick = function () {
     return creep.memory.role === 'upgrader';
   });
 
-  if(upgraders.length < config.upgrader_count) {
+  if(upgraders.length < Memory.config.upgrader_count) {
     Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE], undefined, {
       role: 'upgrader'
     });

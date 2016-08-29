@@ -3,6 +3,6 @@ module.exports.tick = function() {
     return !Game.creeps[key];
   }).forEach(function(value, key) {
     delete Memory.creeps[key];
-    console.log('Cleaning zombie memory', name);
+    console.log('Cleaning zombie memory', key);
   });
 };

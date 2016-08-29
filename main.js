@@ -6,6 +6,28 @@ var room_name = Object.keys(Game.rooms)[0];
 var MAX_X = 50;
 var MAX_Y = 50;
 
+var structures = [
+  'spawn',
+  'extension',
+  'road',
+  'constructedWall',
+  'rampart',
+  'keeperLair',
+  'portal',
+  'controller',
+  'link',
+  'storage',
+  'tower',
+  'observer',
+  'powerBank',
+  'powerSpawn',
+  'extractor',
+  'lab',
+  'terminal',
+  'container',
+  'nuker'
+];
+
 var tick = function () {
   memory.tick();
 
@@ -27,7 +49,8 @@ var tick = function () {
     //make somewhere to store the addition
     var x = Math.floor(Math.random() * MAX_X);
     var y = Math.floor(Math.random() * MAX_Y);
-    Game.rooms[room_name].createConstructionSite(x, y, STRUCTURE_ROAD);
+    var structure = structures[Math.floor(Math.random() * structures.length)];
+    Game.rooms[room_name].createConstructionSite(x, y, structure);
   }
 };
 

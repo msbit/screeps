@@ -8,7 +8,7 @@ module.exports = {
     loadout: [WORK,CARRY,MOVE]
   },
   upgrader: {
-    count: 5,
+    count: 2,
     loadout: [WORK,CARRY,MOVE]
   }
 };

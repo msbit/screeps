@@ -1,7 +1,7 @@
 module.exports.tick = function() {
-  _.filter(Memory.creeps, function(value, key) {
+  _.filter(Object.keys(Memory.creeps), function(key) {
     return !Game.creeps[key];
-  }).forEach(function(value, key) {
+  }).forEach(function(key) {
     delete Memory.creeps[key];
     console.log('Cleaning zombie memory', key);
   });

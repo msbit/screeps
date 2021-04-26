@@ -1,7 +1,9 @@
 Memory.config = require('config');
-const role = require('role');
+
 const memory = require('memory');
-const room_name = Object.keys(Game.rooms)[0];
+const role = require('role');
+
+const roomName = Object.keys(Game.rooms)[0];
 
 const MAX_X = 50;
 const MAX_Y = 50;
@@ -28,30 +30,24 @@ const structures = [
   'nuker'
 ];
 
-const tick = function () {
-  memory.tick();
+module.exports.loop = () => {
+  memory.tick(Game, Memory);
 
-  Object.keys(role.definitions).forEach(function (name) {
+  for (const name in role.definitions) {
     const config = Memory.config[name];
-    const current = _.filter(Game.creeps, function (creep) {
-      return creep.memory.role === name;
-    });
-    if (current.length < config.count) {
-      Game.spawns.Spawn1.createCreep(config.loadout, undefined, {
-        role: name
-      });
-    }
-  });
+    const current = Game.creeps.filter(x => x.memory.role === name);
+    if (current.length >= config.count) { continue; }
 
-  role.tick();
+    Game.spawns.Spawn1.createCreep(config.loadout, undefined, { role: name });
+  }
 
-  /* if(Game.spawns['Spawn1'].energy === Game.spawns['Spawn1'].energyCapacity) {
+  role.tick(Game);
+
+  /* if (Game.spawns['Spawn1'].energy === Game.spawns['Spawn1'].energyCapacity) {
     //make somewhere to store the addition
-    var x = Math.floor(Math.random() * MAX_X);
-    var y = Math.floor(Math.random() * MAX_Y);
-    var structure = structures[Math.floor(Math.random() * structures.length)];
-    Game.rooms[room_name].createConstructionSite(x, y, structure);
+    const x = Math.floor(Math.random() * MAX_X);
+    const y = Math.floor(Math.random() * MAX_Y);
+    const structure = structures[Math.floor(Math.random() * structures.length)];
+    Game.rooms[roomName].createConstructionSite(x, y, structure);
   } */
 };
-
-module.exports.loop = tick;

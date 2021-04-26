@@ -1,11 +1,12 @@
-const util = require('util');
+const { actOnNearest } = require('util');
 
-module.exports.tick = function (creep) {
+module.exports.tick = (creep) => {
   if (creep.carry.energy < creep.carryCapacity) {
-    util.act_on_nearest(creep, FIND_SOURCES, Creep.prototype.harvest);
-  } else {
-    if (creep.transfer(Game.spawns.Spawn1, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-      creep.moveTo(Game.spawns.Spawn1);
-    }
+    actOnNearest(creep, FIND_SOURCES, Creep.prototype.harvest);
+    return;
+  }
+
+  if (creep.transfer(Game.spawns.Spawn1, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+    creep.moveTo(Game.spawns.Spawn1);
   }
 };
